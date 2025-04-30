@@ -27,6 +27,35 @@ import {
     return events.filter(event => event.date === dayStr);
   };
   
+  // Check if two events overlap
+  export const doEventsOverlap = (event1, event2) => {
+    if (event1.date !== event2.date) return false;
+
+    const [start1, end1] = [event1.startTime, event1.endTime].map(time => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+    });
+
+    const [start2, end2] = [event2.startTime, event2.endTime].map(time => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+    });
+
+    return (start1 < end2 && end1 > start2);
+  };
+  
+  // Check for overlapping events in a list
+  export const hasOverlappingEvents = (events) => {
+    for (let i = 0; i < events.length; i++) {
+      for (let j = i + 1; j < events.length; j++) {
+        if (doEventsOverlap(events[i], events[j])) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  
   // Format date for display
   export const formatDateForDisplay = (date) => {
     return format(date, 'MMMM yyyy');

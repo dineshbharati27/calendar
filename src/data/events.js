@@ -63,5 +63,13 @@ export const events = [
     startTime: '14:00',
     endTime: '16:00',
     color: '#DB4437'
+  },
+  {
+    id: '7',
+    title: 'my birthday',
+    date: "2025-04-27",
+    startTime: '14:00',
+    endTime: '16:00',
+    color: '#DB4437'
   }
 ];

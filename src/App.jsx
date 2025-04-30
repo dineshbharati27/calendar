@@ -9,6 +9,10 @@ function App() {
     setEvents([...events, newEvent]);
   };
 
+  const handleDeleteEvent = (eventId) => {
+    setEvents(events.filter(event => event.id !== eventId));
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       <header className="bg-white shadow-sm py-6 px-4 border-b border-indigo-100">
@@ -20,7 +24,11 @@ function App() {
       </header>
       
       <main className="py-8">
-        <Calendar events={events} onAddEvent={handleAddEvent} />
+        <Calendar 
+          events={events} 
+          onAddEvent={handleAddEvent} 
+          onDeleteEvent={handleDeleteEvent}
+        />
       </main>
     </div>
   );

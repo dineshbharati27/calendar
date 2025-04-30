@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { X } from 'lucide-react';
+import { doEventsOverlap } from '../utils/calendarHelpers';
 
 const COLORS = [
   '#4285F4', // Google Blue
@@ -9,29 +10,42 @@ const COLORS = [
   '#F4B400', // Google Yellow
 ];
 
-const NewEventModal = ({ isOpen, onClose, selectedDate, onSave }) => {
+const NewEventModal = ({ isOpen, onClose, selectedDate, onSave, existingEvents }) => {
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('10:00');
   const [color, setColor] = useState(COLORS[0]);
+  const [error, setError] = useState('');
 
   if (!isOpen || !selectedDate) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
 
     if (endTime <= startTime) {
-      alert('End time must be after start time.');
+      setError('End time must be after start time.');
       return;
     }
 
-    onSave({
+    const newEvent = {
       title,
       date: format(selectedDate, 'yyyy-MM-dd'),
       startTime,
       endTime,
       color,
-    });
+    };
+
+    // Check for overlapping events
+    const dayEvents = existingEvents.filter(event => event.date === newEvent.date);
+    const hasOverlap = dayEvents.some(event => doEventsOverlap(event, newEvent));
+
+    if (hasOverlap) {
+      setError('This event overlaps with an existing event.');
+      return;
+    }
+
+    onSave(newEvent);
 
     setTitle('');
     setStartTime('09:00');
@@ -54,6 +68,12 @@ const NewEventModal = ({ isOpen, onClose, selectedDate, onSave }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
+          {error && (
+            <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg">
+              {error}
+            </div>
+          )}
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Event Title

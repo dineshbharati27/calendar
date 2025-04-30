@@ -4,7 +4,7 @@ import DayCell from './DayCell';
 
 const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const CalendarGrid = ({ currentMonth, today, events, onAddEvent }) => {
+const CalendarGrid = ({ currentMonth, today, events, onAddEvent, onEventClick }) => {
   const days = getCalendarDays(currentMonth);
 
   return (
@@ -32,6 +32,7 @@ const CalendarGrid = ({ currentMonth, today, events, onAddEvent }) => {
               today={today}
               events={dayEvents}
               onAddEvent={onAddEvent}
+              onEventClick={onEventClick}
             />
           );
         })}

@@ -1,12 +1,13 @@
 import React from 'react';
-import { getDayOfMonth, isCurrentMonth, isToday } from '../utils/calendarHelpers';
+import { getDayOfMonth, isCurrentMonth, isToday, hasOverlappingEvents } from '../utils/calendarHelpers';
 import EventBadge from './EventBadge';
-import { Plus } from 'lucide-react';
+import { Plus, AlertTriangle } from 'lucide-react';
 
-const DayCell = ({ day, currentMonth, today, events, onAddEvent }) => {
+const DayCell = ({ day, currentMonth, today, events, onAddEvent, onEventClick }) => {
   const dayNumber = getDayOfMonth(day);
   const isInCurrentMonth = isCurrentMonth(day, currentMonth);
   const isTodayDate = isToday(day, today);
+  const hasOverlaps = events.length > 1 && hasOverlappingEvents(events);
 
   return (
     <div 
@@ -44,9 +45,20 @@ const DayCell = ({ day, currentMonth, today, events, onAddEvent }) => {
         </button>
       </div>
 
+      {hasOverlaps && (
+        <div className="flex items-center gap-1 px-2 py-1 text-xs text-amber-600 bg-amber-50">
+          <AlertTriangle size={12} />
+          <span>Overlapping events</span>
+        </div>
+      )}
+
       <div className="px-1 space-y-1 overflow-y-auto" style={{ maxHeight: '80px' }}>
         {events.map((event) => (
-          <EventBadge key={event.id} event={event} />
+          <EventBadge 
+            key={event.id} 
+            event={event} 
+            onClick={onEventClick}
+          />
         ))}
       </div>
     </div>
