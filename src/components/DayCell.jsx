@@ -53,9 +53,9 @@ const DayCell = ({ day, currentMonth, today, events, onAddEvent, onEventClick })
       )}
 
       <div className="px-1 space-y-1 overflow-y-auto" style={{ maxHeight: '80px' }}>
-        {events.map((event) => (
+        {events.map((event, index) => (
           <EventBadge 
-            key={event.id} 
+            key={index} 
             event={event} 
             onClick={onEventClick}
           />

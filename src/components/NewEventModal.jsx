@@ -12,8 +12,8 @@ const COLORS = [
 
 const NewEventModal = ({ isOpen, onClose, selectedDate, onSave, existingEvents }) => {
   const [title, setTitle] = useState('');
-  const [startTime, setStartTime] = useState('09:00');
-  const [endTime, setEndTime] = useState('10:00');
+  const [startTime, setStartTime] = useState('09:01');
+  const [endTime, setEndTime] = useState('10:01');
   const [color, setColor] = useState(COLORS[0]);
   const [error, setError] = useState('');
 
@@ -48,8 +48,8 @@ const NewEventModal = ({ isOpen, onClose, selectedDate, onSave, existingEvents }
     onSave(newEvent);
 
     setTitle('');
-    setStartTime('09:00');
-    setEndTime('10:00');
+    setStartTime('09:01');
+    setEndTime('10:01');
     setColor(COLORS[0]);
     onClose();
   };
