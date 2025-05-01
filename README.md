@@ -1,12 +1,82 @@
-# React + Vite
+# Interactive Calendar Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive calendar application built with React that allows users to manage events, view event details, and navigate through different months and years.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📅 Monthly calendar view with intuitive navigation
+- ✨ Create, view, and delete events
+- 🎨 Color-coded event badges
+- 📱 Responsive design for all screen sizes
+- 🔍 Event search functionality
+- 📝 Detailed event information display
+- 🎯 Easy month and year selection
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── components/
+│   ├── Calendar.jsx           # Main calendar component
+│   ├── CalendarGrid.jsx       # Grid layout for calendar days
+│   ├── CalendarHeader.jsx     # Header with navigation controls
+│   ├── DayCell.jsx           # Individual day cell component
+│   ├── EventBadge.jsx        # Event display badge
+│   ├── EventDetailsModal.jsx # Event details popup
+│   ├── MonthPicker.jsx       # Month selection component
+│   └── NewEventModal.jsx     # New event creation form
+├── utils/
+│   └── calendarHelpers.js    # Utility functions for calendar operations
+├── data/
+│   └── events.js             # Event data management
+├── App.jsx                   # Main application component
+└── main.jsx                  # Application entry point
+```
+
+## Key Components
+
+### Calendar
+The main component that orchestrates the calendar functionality, managing state and coordinating between different sub-components.
+
+### Event Management
+- **Event Creation**: Add new events with title, description, and color
+- **Event Viewing**: Click on events to view detailed information
+- **Event Deletion**: Remove events with confirmation
+
+### Navigation
+- Month and year selection
+- Previous/Next month navigation
+- Current date highlighting
+
+## Technical Details
+
+- Built with React and modern JavaScript
+- Responsive design using CSS
+- Event state management
+- Modal-based user interactions
+- Date manipulation utilities
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Usage
+
+1. Navigate through months using the arrow buttons
+2. Click on a day to add a new event
+3. Click on an existing event to view or delete it
+4. Use the month picker to quickly jump to a specific month
+5. Search for events using the search functionality
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
