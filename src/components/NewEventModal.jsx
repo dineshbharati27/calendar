@@ -10,18 +10,20 @@ const COLORS = [
   '#F4B400', // Google Yellow
 ];
 
-const NewEventModal = ({ isOpen, onClose, selectedDate, onSave, existingEvents }) => {
+const NewEventModal = ({ isOpen, onClose, selectedDate, onSave, existingEvents, onDeleteEvent }) => {
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('10:00');
   const [color, setColor] = useState(COLORS[0]);
   const [error, setError] = useState('');
+  const [overlappingEvent, setOverlappingEvent] = useState(null);
 
   if (!isOpen || !selectedDate) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
+    setOverlappingEvent(null);
 
     if (endTime <= startTime) {
       setError('End time must be after start time.');
@@ -38,20 +40,41 @@ const NewEventModal = ({ isOpen, onClose, selectedDate, onSave, existingEvents }
 
     // Check for overlapping events
     const dayEvents = existingEvents.filter(event => event.date === newEvent.date);
-    const hasOverlap = dayEvents.some(event => doEventsOverlap(event, newEvent));
+    const overlapping = dayEvents.find(event => doEventsOverlap(event, newEvent));
 
-    if (hasOverlap) {
-      setError('This event overlaps with an existing event.');
+    if (overlapping) {
+      setOverlappingEvent(overlapping);
       return;
     }
 
     onSave(newEvent);
+    resetForm();
+    onClose();
+  };
 
+  const handleReplaceEvent = () => {
+    if (overlappingEvent) {
+      onDeleteEvent(overlappingEvent.id);
+      const newEvent = {
+        title,
+        date: format(selectedDate, 'yyyy-MM-dd'),
+        startTime,
+        endTime,
+        color,
+      };
+      onSave(newEvent);
+      resetForm();
+      onClose();
+    }
+  };
+
+  const resetForm = () => {
     setTitle('');
     setStartTime('09:00');
     setEndTime('10:00');
     setColor(COLORS[0]);
-    onClose();
+    setError('');
+    setOverlappingEvent(null);
   };
 
   return (
@@ -71,6 +94,33 @@ const NewEventModal = ({ isOpen, onClose, selectedDate, onSave, existingEvents }
           {error && (
             <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg">
               {error}
+            </div>
+          )}
+
+          {overlappingEvent && (
+            <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+              <p className="text-yellow-800 font-medium mb-2">
+                Event Overlap Detected
+              </p>
+              <p className="text-yellow-700 text-sm mb-4">
+                This time slot overlaps with an existing event: "{overlappingEvent.title}"
+              </p>
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setOverlappingEvent(null)}
+                  className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReplaceEvent}
+                  className="px-3 py-1.5 text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 rounded-lg transition-colors duration-200"
+                >
+                  Replace Event
+                </button>
+              </div>
             </div>
           )}
 

@@ -77,6 +77,7 @@ const Calendar = ({ events, onAddEvent, onDeleteEvent }) => {
         selectedDate={selectedDate}
         onSave={handleSaveEvent}
         existingEvents={events}
+        onDeleteEvent={handleDeleteEvent}
       />
 
       {isEventDetailsModalOpen && selectedEvent && (
