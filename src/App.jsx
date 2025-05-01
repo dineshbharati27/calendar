@@ -23,7 +23,7 @@ function App() {
         </div>
       </header>
       
-      <main className="py-8">
+      <main className="py-2">
         <Calendar 
           events={events} 
           onAddEvent={handleAddEvent} 

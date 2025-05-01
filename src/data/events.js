@@ -9,7 +9,6 @@ const nextWeek = addDays(today, 7);
 
 export const events = [
   {
-    id: '1',
     title: 'Team Meeting',
     date: format(today, 'yyyy-MM-dd'),
     startTime: '09:00',
@@ -17,7 +16,6 @@ export const events = [
     color: '#4285F4'
   },
   {
-    id: '2',
     title: 'Lunch with Client',
     date: format(today, 'yyyy-MM-dd'),
     startTime: '12:00',
@@ -25,7 +23,6 @@ export const events = [
     color: '#0F9D58' 
   },
   {
-    id: '3',
     title: 'Product Review',
     date: format(tomorrow, 'yyyy-MM-dd'),
     startTime: '14:00',
@@ -33,7 +30,6 @@ export const events = [
     color: '#DB4437' 
   },
   {
-    id: '4',
     title: 'Weekly Planning',
     date: format(tomorrow, 'yyyy-MM-dd'),
     startTime: '09:30',
@@ -41,7 +37,6 @@ export const events = [
     color: '#F4B400'
   },
   {
-    id: '5',
     title: 'Design Workshop',
     date: format(dayAfterTomorrow, 'yyyy-MM-dd'),
     startTime: '13:00',
@@ -49,7 +44,6 @@ export const events = [
     color: '#4285F4'
   },
   {
-    id: '6',
     title: 'Code Review',
     date: format(nextWeek, 'yyyy-MM-dd'),
     startTime: '10:00',
@@ -57,7 +51,6 @@ export const events = [
     color: '#0F9D58'
   },
   {
-    id: '7',
     title: 'Quarterly Review',
     date: format(nextWeek, 'yyyy-MM-dd'),
     startTime: '14:00',
