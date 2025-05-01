@@ -2,6 +2,8 @@
 
 A modern, responsive calendar application built with React that allows users to manage events, view event details, and navigate through different months and years.
 
+🌐 **Live Demo**: [https://calendar-one-alpha.vercel.app/](https://calendar-one-alpha.vercel.app/)
+
 ## Features
 
 - 📅 Monthly calendar view with intuitive navigation
