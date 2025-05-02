@@ -15,15 +15,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      <header className="bg-white shadow-sm py-6 px-4 border-b border-indigo-100">
+      <header className="bg-white shadow-sm py-2 px-4 border-b border-indigo-100">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-            React Calendar
+            Survey Sparrow
           </h1>
         </div>
       </header>
       
-      <main className="py-2">
+      <main className="py-3">
         <Calendar 
           events={events} 
           onAddEvent={handleAddEvent} 

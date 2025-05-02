@@ -9,11 +9,16 @@ const DayCell = ({ day, currentMonth, today, events, onAddEvent, onEventClick })
   const isTodayDate = isToday(day, today);
   const hasOverlaps = events.length > 1 && hasOverlappingEvents(events);
 
+  // Sort events by startTime
+  const sortedEvents = [...events].sort((a, b) => {
+    return a.startTime.localeCompare(b.startTime);
+  });
+
   return (
     <div 
       className={`
         relative group transition-colors duration-200
-        border-r border-b border-indigo-100 min-h-[120px]
+        border-r border-b border-indigo-100 min-h-[100px]
         ${isInCurrentMonth ? 'bg-white hover:bg-indigo-50/50' : 'bg-gray-50'}
       `}
     >
@@ -35,9 +40,10 @@ const DayCell = ({ day, currentMonth, today, events, onAddEvent, onEventClick })
         <button
           onClick={() => onAddEvent(day)}
           className={`
-            opacity-0 group-hover:opacity-100 p-1.5 
+            sm:opacity-0 sm:group-hover:opacity-100 p-1.5 
             hover:bg-indigo-100 rounded-full 
             transition-all duration-200 ease-in-out
+            bg-indigo-50/50 sm:bg-transparent
           `}
           aria-label="Add event"
         >
@@ -53,7 +59,7 @@ const DayCell = ({ day, currentMonth, today, events, onAddEvent, onEventClick })
       )}
 
       <div className="px-1 space-y-1 overflow-y-auto" style={{ maxHeight: '80px' }}>
-        {events.map((event, index) => (
+        {sortedEvents.map((event, index) => (
           <EventBadge 
             key={index} 
             event={event} 
